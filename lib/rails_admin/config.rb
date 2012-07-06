@@ -315,7 +315,7 @@ module RailsAdmin
         end
       end
 
-      # Boolean for checking which style of navigation should be rendered.
+      # Boolean shortcuts for checking which style of navigation should be rendered.
       #
       # @see RailsAdmin::Config.nav_style
       def sidebar_nav?

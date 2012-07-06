@@ -20,6 +20,10 @@ RailsAdmin.config do |config|
   # or for a dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
+  #  ==> Global navigation settings
+  # Use a value of 'header' for horizontal nav, built in to the main header bar.
+  # The header style works best with fewer models and no nesting of nav items. Default is 'sidebar'.
+  # config.nav_style = 'sidebar'
 
   #  ==> Global show view settings
   # Display empty fields in show views
@@ -28,6 +32,9 @@ RailsAdmin.config do |config|
   #  ==> Global list view settings
   # Number of default rows per-page:
   # config.default_items_per_page = 20
+
+  # Configure the total width of the listing table. Defaults to 697.
+  # config.total_columns_width = 697
 
   #  ==> Included models
   # Add all excluded models here:
