@@ -1,5 +1,3 @@
-%ul.nav.nav-list.pull-left
-  = main_navigation if RailsAdmin::Config.header_nav?
 %ul.nav.pull-right
   - actions(:root).each do |action|
     %li= link_to wording_for(:menu, action), { :action => action.action_name, :controller => 'rails_admin/main' }, :class => 'pjax'
