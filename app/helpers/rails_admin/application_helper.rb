@@ -10,8 +10,8 @@ module RailsAdmin
     end
 
     def current_action?(action, abstract_model = @abstract_model, object = @object)
-      @action.custom_key == action.custom_key && 
-      abstract_model.try(:to_param) == @abstract_model.try(:to_param) && 
+      @action.custom_key == action.custom_key &&
+      abstract_model.try(:to_param) == @abstract_model.try(:to_param) &&
       (@object.try(:persisted?) ? @object.id == object.try(:id) : !object.try(:persisted?))
     end
 
@@ -43,7 +43,7 @@ module RailsAdmin
     end
 
     def main_navigation
-      nodes_stack = RailsAdmin::Config.visible_models(:controller => self.controller)      
+      nodes_stack = RailsAdmin::Config.visible_models(:controller => self.controller)
       nodes_stack.group_by(&:navigation_label).map do |navigation_label, nodes|
 
         li_stack = nodes.select{|n| n.parent.nil? || !n.parent.to_s.in?(nodes_stack.map{|c| c.abstract_model.model_name }) }.map do |node|
@@ -55,7 +55,7 @@ module RailsAdmin
           }.html_safe
         end.join.html_safe
 
-        if li_stack.present?
+        if li_stack.present? && RailsAdmin::Config.sidebar_nav?
           li_stack = %{<li class='nav-header'>#{navigation_label || t('admin.misc.navigation')}</li>}.html_safe + li_stack
         end
 
