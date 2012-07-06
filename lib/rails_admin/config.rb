@@ -60,6 +60,10 @@ module RailsAdmin
       # Set the max width of columns in list view before a new set is created
       attr_accessor :total_columns_width
 
+      # Configuration option to specify if the main nav should be in the 'sidebar'
+      # or listed horizontally in the 'header' bar. This defaults to 'sidebar'
+      attr_accessor :nav_style
+
       # Stores model configuration objects in a hash identified by model's class
       # name.
       #
@@ -286,6 +290,7 @@ module RailsAdmin
         @excluded_models = []
         @included_models = []
         @total_columns_width = 697
+        @nav_style = 'sidebar'
         @label_methods = [:name, :title]
         @main_app_name = Proc.new { [Rails.application.engine_name.titleize.chomp(' Application'), 'Admin'] }
         @registry = {}
@@ -308,6 +313,17 @@ module RailsAdmin
         models.map{|m| m.with(bindings) }.select{|m| m.visible? && bindings[:controller].authorized?(:index, m.abstract_model) && !m.abstract_model.embedded?}.sort do |a, b|
           (weight_order = a.weight <=> b.weight) == 0 ? a.label.downcase <=> b.label.downcase : weight_order
         end
+      end
+
+      # Boolean for checking which style of navigation should be rendered.
+      #
+      # @see RailsAdmin::Config.nav_style
+      def sidebar_nav?
+        nav_style == 'sidebar'
+      end
+
+      def header_nav?
+        nav_style == 'header'
       end
 
       private

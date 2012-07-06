@@ -17,10 +17,11 @@
           .nav-collapse
             = render :partial => 'layouts/rails_admin/secondary_navigation'
     .container-fluid
-      .row-fluid
-        .span1
-          .well.sidebar-nav
-            %ul.nav.nav-list= main_navigation
-        .span11
+      - if RailsAdmin::Config.sidebar_nav?
+        .row-fluid
+          .span3
+            .well.sidebar-nav
+              %ul.nav.nav-list= main_navigation
+        .span9
           .row-fluid
             .content{:'data-pjax-container' => true}= render :template => 'layouts/rails_admin/pjax'
